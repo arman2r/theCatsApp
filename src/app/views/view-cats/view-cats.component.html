@@ -1,0 +1,51 @@
+<ion-content class="ion-padding">
+  <ng-container *ngIf="loadCats">
+    <ion-card *ngFor="let preload of preloadQ">
+      <ion-list-header>
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 80px"
+        ></ion-skeleton-text>
+      </ion-list-header>
+      <ion-item>
+        <ion-thumbnail style="width: 100%; height: 150px">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <span style="width: 100px">
+            <ion-skeleton-text
+              [animated]="true"
+              style="width: 60%"
+            ></ion-skeleton-text>
+          </span>
+          <span style="width: 100px">
+            <ion-skeleton-text
+              [animated]="true"
+              style="width: 60%"
+            ></ion-skeleton-text>
+          </span>
+        </ion-row>
+      </ion-item>
+    </ion-card>
+  </ng-container>
+
+  <ion-row
+    *ngIf="isErrorCats"
+    class="ion-align-items-center ion-justify-content-center"
+  >
+    <ion-icon size="large" name="close" color="danger"></ion-icon>
+    <ion-text>error al cargar la lista de gatos</ion-text>
+  </ion-row>
+
+  <ng-container *ngFor="let cat of collectionCats">
+    <app-card [dataCat]="cat"></app-card>
+  </ng-container>
+  <ion-infinite-scroll
+    *ngIf="collectionCats"
+    (ionInfinite)="onIonInfinite($event)"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
